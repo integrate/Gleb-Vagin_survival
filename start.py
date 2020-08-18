@@ -6,15 +6,15 @@ pygame.mixer.init()  # для звука
 screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
 pygame.display.set_caption("Survival")
 clock = pygame.time.Clock()
-t = blocks.Block(200, 914)
-g = blocks.Block(500, 805)
+t = blocks.Block(200, 914, blocks.BLOCK_TYPE_STONE)
+g = blocks.Block(500, 805, blocks.BLOCK_TYPE_WOOD)
 group_blocks = pygame.sprite.Group()
 group_blocks.add(t, g)
 group_sprite = pygame.sprite.Group()
 p = player.Player('name', settings.SCREEN_WIDTH/2, 0)
 group_sprite.add(p, t, g)
 # Фон игры
-image = pygame.image.load('C:/Users/#MOB/PycharmProjects/Projects/assets/1_37.png')
+image = pygame.image.load('assets/1_37.png')
 image_rect = image.get_rect()
 fon = pygame.Surface([settings.SCREEN_WIDTH + image_rect.width, settings.SCREEN_HEIGHT])
 k = 0
