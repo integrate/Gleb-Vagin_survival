@@ -20,27 +20,27 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = y
         self.speed_y = 0
         self.speed_x = 0
-        self.state = PLAYER_STATE_STAND
+        self.state_y = PLAYER_STATE_STAND
         self.__update_state()
 
     def __update_state(self):
-        if self.state == PLAYER_STATE_STAND:
+        if self.state_y == PLAYER_STATE_STAND:
             self.image = PLAYER_IMAGE_STAND
-        elif self.state == PLAYER_STATE_UP:
+        elif self.state_y == PLAYER_STATE_UP:
             self.image = PLAYER_IMAGE_UP
-        elif self.state == PLAYER_STATE_DOWN:
+        elif self.state_y == PLAYER_STATE_DOWN:
             self.image = PLAYER_IMAGE_DOWN
 
     def jump(self):
-        if self.state == PLAYER_STATE_STAND:
+        if self.state_y == PLAYER_STATE_STAND:
             self.speed_y = - 60
 
     def update(self, group_blocks):
         self.speed_y += 4
         if self.speed_y < 0:
-            self.state = PLAYER_STATE_UP
+            self.state_y = PLAYER_STATE_UP
         if self.speed_y > 0:
-            self.state = PLAYER_STATE_DOWN
+            self.state_y = PLAYER_STATE_DOWN
         # if self.speed_x < 3:
         #     self.speed_x += 1
 
@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite):
         if f is not None:
             if self.speed_y > 0:
                 self.rect.bottom = f.rect.top
-                self.state = PLAYER_STATE_STAND
+                self.state_y = PLAYER_STATE_STAND
 
             if self.speed_y < 0:
                 self.rect.top = f.rect.bottom
@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = settings.GROUND_HEIGHT
             self.speed_y = 0
         if self.rect.bottom == settings.GROUND_HEIGHT:
-            self.state = PLAYER_STATE_STAND
+            self.state_y = PLAYER_STATE_STAND
 
         self.rect.x += self.speed_x
         f = pygame.sprite.spritecollideany(self, group_blocks)
