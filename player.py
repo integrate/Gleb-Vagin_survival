@@ -8,6 +8,9 @@ PLAYER_IMAGE_STAND = pygame.image.load('assets/player_stand.png')
 PLAYER_IMAGE_DOWN = pygame.image.load('assets/player_down.png')
 PLAYER_IMAGE_UP = pygame.image.load('assets/player_up.png')
 
+PLAYER_STATE_LEFT = 4
+PLAYER_STATE_RIGHT = 5
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, name, x, y):
@@ -20,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.centery = y
         self.speed_y = 0
         self.speed_x = 0
+        self.state_x = PLAYER_STATE_LEFT
         self.state_y = PLAYER_STATE_STAND
         self.__update_state()
 
@@ -30,6 +34,9 @@ class Player(pygame.sprite.Sprite):
             self.image = PLAYER_IMAGE_UP
         elif self.state_y == PLAYER_STATE_DOWN:
             self.image = PLAYER_IMAGE_DOWN
+
+        if self.state_x == PLAYER_STATE_LEFT:
+            self.image = pygame.transform.flip(self.image, True, False)
 
     def jump(self):
         if self.state_y == PLAYER_STATE_STAND:
@@ -64,6 +71,7 @@ class Player(pygame.sprite.Sprite):
             self.state_y = PLAYER_STATE_STAND
 
         self.rect.x += self.speed_x
+        # Проверяем на столкновение с блоками по x
         f = pygame.sprite.spritecollideany(self, group_blocks)
         if f is not None:
             if self.speed_x > 0:
@@ -71,8 +79,15 @@ class Player(pygame.sprite.Sprite):
             if self.speed_x < 0:
                 self.rect.left = f.rect.right
 
+        # Делаем так, что бы человечек но мог выйти за границы экрана
         if self.rect.right > settings.SCREEN_WIDTH:
             self.rect.right = settings.SCREEN_WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+
+        if self.speed_x < 0:
+            self.state_x = PLAYER_STATE_LEFT
+        if self.speed_x > 0:
+            self.state_x = PLAYER_STATE_RIGHT
+
         self.__update_state()
