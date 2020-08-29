@@ -16,12 +16,7 @@ class Block(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.rect = pygame.Rect(x, y, 37, 36)
         self.tip = tip
-        if self.tip == BLOCK_TYPE_GROUND:
-            self.hp = settings.HP_GROUND
-        elif self.tip == BLOCK_TYPE_WOOD:
-            self.hp = settings.HP_WOOD
-        elif self.tip == BLOCK_TYPE_STONE:
-            self.hp = settings.HP_STONE
+        self.hp = settings.BLOCK_HP[tip]
         self.__update_state()
 
     def damage(self):
@@ -31,12 +26,7 @@ class Block(pygame.sprite.Sprite):
             self.kill()
 
     def __update_state(self):
-        if self.tip == BLOCK_TYPE_GROUND:
-            self.image = BLOCK_IMAGE_GROUND.copy()
-        elif self.tip == BLOCK_TYPE_WOOD:
-            self.image = BLOCK_IMAGE_WOOD.copy()
-        elif self.tip == BLOCK_TYPE_STONE:
-            self.image = BLOCK_IMAGE_STONE.copy()
+        settings.BLOCK_IMAGE[self.tip]
 
         f = pygame.font.SysFont('arial', 25)
         f_render = f.render(str(self.hp), True, [0, 255, 0])
