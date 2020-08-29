@@ -6,10 +6,6 @@ BLOCK_TYPE_GROUND = 1
 BLOCK_TYPE_WOOD = 2
 BLOCK_TYPE_STONE = 3
 
-BLOCK_IMAGE_GROUND = pygame.image.load("assets/blocks/ground.jpg")
-BLOCK_IMAGE_STONE = pygame.image.load("assets/blocks/stone.png")
-BLOCK_IMAGE_WOOD = pygame.image.load("assets/blocks/wood.png")
-
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, x, y, tip):
@@ -26,7 +22,7 @@ class Block(pygame.sprite.Sprite):
             self.kill()
 
     def __update_state(self):
-        settings.BLOCK_IMAGE[self.tip]
+        self.image = settings.BLOCK_IMAGE[self.tip].copy()
 
         f = pygame.font.SysFont('arial', 25)
         f_render = f.render(str(self.hp), True, [0, 255, 0])
