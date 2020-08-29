@@ -1,4 +1,5 @@
-import pygame, settings
+import pygame
+import settings
 
 PLAYER_STATE_STAND = 1
 PLAYER_STATE_DOWN = 2

@@ -27,7 +27,7 @@ running = True
 while running:
     clock.tick(60)
 
-    scr += 1
+    scr += 0
     u = round(scr) % image_rect.width
     # fon.scroll(-1, 0)
 
@@ -38,19 +38,23 @@ while running:
         # проверить закрытие окна
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            g.damage()
 
-    a = pygame.key.get_pressed()
+    keyboard = pygame.key.get_pressed()
+    mouse = pygame.mouse.get_pressed()
 
-    if a[pygame.K_SPACE] == 1:
+    if keyboard[pygame.K_SPACE] == 1:
         p.jump()
-    elif a[pygame.K_d] == 1:
+    elif keyboard[pygame.K_d] == 1:
         p.speed_x = 5
-        # scr += 5
-    elif a[pygame.K_a] == 1:
+        scr += 10
+    elif keyboard[pygame.K_a] == 1:
         p.speed_x = - 5
-        # scr -= 5
+        scr -= 10
     else:
         p.speed_x = 0
+
     # Обновление
     p.update(group_blocks)
     # Рендеринг
