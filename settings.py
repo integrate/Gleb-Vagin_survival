@@ -13,3 +13,8 @@ BLOCK_IMAGE = {
     blocks.BLOCK_TYPE_GROUND: pygame.image.load("assets/blocks/ground.jpg"),
     blocks.BLOCK_TYPE_WOOD: pygame.image.load("assets/blocks/wood.png"),
     blocks.BLOCK_TYPE_STONE: pygame.image.load("assets/blocks/stone.png")}
+
+BLOCK_IMAGE_BROKEN = {
+    blocks.BLOCK_TYPE_GROUND: pygame.image.load("assets/blocks/broken_ground.jpg"),
+    blocks.BLOCK_TYPE_WOOD: pygame.image.load("assets/blocks/broken_wood.png"),
+    blocks.BLOCK_TYPE_STONE: pygame.image.load("assets/blocks/broken_stone.png")}

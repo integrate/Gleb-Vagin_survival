@@ -22,7 +22,10 @@ class Block(pygame.sprite.Sprite):
             self.kill()
 
     def __update_state(self):
-        self.image = settings.BLOCK_IMAGE[self.tip].copy()
+        if self.hp <= settings.BLOCK_HP[self.tip] / 2:
+            self.image = settings.BLOCK_IMAGE_BROKEN[self.tip].copy()
+        else:
+            self.image = settings.BLOCK_IMAGE[self.tip].copy()
 
         f = pygame.font.SysFont('arial', 25)
         f_render = f.render(str(self.hp), True, [0, 255, 0])

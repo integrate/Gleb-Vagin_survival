@@ -3,7 +3,9 @@ import pygame, player, blocks, settings
 # создаем игру и окно
 pygame.init()
 pygame.mixer.init()  # для звука
-screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+settings.SCREEN_WIDTH = screen.get_width()
+settings.SCREEN_HEIGHT = screen.get_height()
 pygame.display.set_caption("Survival")
 clock = pygame.time.Clock()
 t = blocks.Block(200, 914, blocks.BLOCK_TYPE_STONE)
@@ -11,7 +13,7 @@ g = blocks.Block(500, 805, blocks.BLOCK_TYPE_WOOD)
 group_blocks = pygame.sprite.Group()
 group_blocks.add(t, g)
 group_sprite = pygame.sprite.Group()
-p = player.Player('name', settings.SCREEN_WIDTH/2, 0)
+p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
 group_sprite.add(p, t, g)
 # Фон игры
 image = pygame.image.load('assets/1_37.png')
@@ -21,6 +23,7 @@ k = 0
 while k <= settings.SCREEN_WIDTH + image_rect.width:
     fon.blit(image, [k, 0])
     k += image_rect.width
+
 scr = 0
 # Цикл игры
 running = True
@@ -40,6 +43,7 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             g.damage()
+            t.damage()
 
     keyboard = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
