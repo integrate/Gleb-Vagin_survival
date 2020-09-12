@@ -1,4 +1,4 @@
-import pygame, player, blocks, settings
+import pygame, player, blocks, settings, math
 
 # создаем игру и окно
 pygame.init()
@@ -8,13 +8,14 @@ settings.SCREEN_WIDTH = screen.get_width()
 settings.SCREEN_HEIGHT = screen.get_height()
 pygame.display.set_caption("Survival")
 clock = pygame.time.Clock()
-t = blocks.Block(200, 914, blocks.BLOCK_TYPE_STONE)
+t = blocks.Block(200, 920, blocks.BLOCK_TYPE_STONE)
 g = blocks.Block(500, 805, blocks.BLOCK_TYPE_WOOD)
+r = blocks.Block(400, 600, blocks.BLOCK_TYPE_GROUND)
 group_blocks = pygame.sprite.Group()
-group_blocks.add(t, g)
+group_blocks.add(t, g, r)
 group_sprite = pygame.sprite.Group()
 p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
-group_sprite.add(p, t, g)
+group_sprite.add(p, t, g, r)
 # Фон игры
 image = pygame.image.load('assets/1_37.png')
 image_rect = image.get_rect()
@@ -41,10 +42,14 @@ while running:
         # проверить закрытие окна
         if event.type == pygame.QUIT:
             running = False
+            # Проверка попали мы по блоку или нет
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            g.damage()
-            t.damage()
-
+            blocks = group_blocks.sprites()
+            for block in blocks:
+                if block.rect.collidepoint(event.pos):
+                    rastoyanie = math.dist(p.rect.center, block.rect.center)
+                    if rastoyanie < 250:
+                        block.damage()
     keyboard = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
 
