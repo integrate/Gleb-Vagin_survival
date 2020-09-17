@@ -1,21 +1,34 @@
 import pygame, player, blocks, settings, math
 
-# создаем игру и окно
+# подготавливаем библиотеку
 pygame.init()
 pygame.mixer.init()  # для звука
+
+# создаём окно
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+# screen = pygame.display.set_mode((0, 0))
 settings.SCREEN_WIDTH = screen.get_width()
 settings.SCREEN_HEIGHT = screen.get_height()
 pygame.display.set_caption("Survival")
+
+# часы
 clock = pygame.time.Clock()
+
+# создаём группу спрайт
+group_sprite = pygame.sprite.Group()
+
+# создаём блоки
 t = blocks.Block(200, 920, blocks.BLOCK_TYPE_STONE)
 g = blocks.Block(500, 805, blocks.BLOCK_TYPE_WOOD)
 r = blocks.Block(400, 600, blocks.BLOCK_TYPE_GROUND)
 group_blocks = pygame.sprite.Group()
 group_blocks.add(t, g, r)
-group_sprite = pygame.sprite.Group()
+group_sprite.add(t, g, r)
+
+# создаём игрока
 p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
-group_sprite.add(p, t, g, r)
+group_sprite.add(p)
+
 # Фон игры
 image = pygame.image.load('assets/1_37.png')
 image_rect = image.get_rect()
@@ -25,24 +38,24 @@ while k <= settings.SCREEN_WIDTH + image_rect.width:
     fon.blit(image, [k, 0])
     k += image_rect.width
 
+# устанавливаем смещение фона
 scr = 0
+
 # Цикл игры
 running = True
 while running:
+    # задержка
     clock.tick(60)
 
-    scr += 0
-    u = round(scr) % image_rect.width
-    # fon.scroll(-1, 0)
-
-    # Ввод процесса (события)
+    # обрабатываем события
     new_events = pygame.event.get()
     for event in new_events:
 
         # проверить закрытие окна
         if event.type == pygame.QUIT:
             running = False
-            # Проверка попали мы по блоку или нет
+
+        # Проверка попали мы по блоку или нет
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             blocks = group_blocks.sprites()
             for block in blocks:
@@ -50,8 +63,9 @@ while running:
                     rastoyanie = math.dist(p.rect.center, block.rect.center)
                     if rastoyanie < 250:
                         block.damage()
+
+    # обработка событий клавиатуры
     keyboard = pygame.key.get_pressed()
-    mouse = pygame.mouse.get_pressed()
 
     if keyboard[pygame.K_SPACE] == 1:
         p.jump()
@@ -66,7 +80,9 @@ while running:
 
     # Обновление
     p.update(group_blocks)
+
     # Рендеринг
+    u = round(scr) % image_rect.width
     screen.fill([0, 0, 0])
     screen.blit(fon, [-u, 0])
     group_sprite.draw(screen)
