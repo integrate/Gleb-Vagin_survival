@@ -1,13 +1,14 @@
 import pygame
 import settings
+import utilite
 
 PLAYER_STATE_STAND = 1
 PLAYER_STATE_DOWN = 2
 PLAYER_STATE_UP = 3
 
-PLAYER_IMAGE_STAND = pygame.image.load('assets/player_stand.png')
-PLAYER_IMAGE_DOWN = pygame.image.load('assets/player_down.png')
-PLAYER_IMAGE_UP = pygame.image.load('assets/player_up.png')
+PLAYER_IMAGE_STAND = pygame.image.load(utilite.get_path('assets/player_stand.png'))
+PLAYER_IMAGE_DOWN = pygame.image.load(utilite.get_path('assets/player_down.png'))
+PLAYER_IMAGE_UP = pygame.image.load(utilite.get_path('assets/player_up.png'))
 
 PLAYER_STATE_LEFT = 4
 PLAYER_STATE_RIGHT = 5

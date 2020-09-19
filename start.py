@@ -1,5 +1,6 @@
-import pygame, player, blocks, settings, math
+import pygame, player, blocks, settings, math, utilite
 
+print(__file__)
 # подготавливаем библиотеку
 pygame.init()
 pygame.mixer.init()  # для звука
@@ -30,7 +31,7 @@ p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
 group_sprite.add(p)
 
 # Фон игры
-image = pygame.image.load('assets/1_37.png')
+image = pygame.image.load(utilite.get_path('assets/1_37.png'))
 image_rect = image.get_rect()
 fon = pygame.Surface([settings.SCREEN_WIDTH + image_rect.width, settings.SCREEN_HEIGHT])
 k = 0
