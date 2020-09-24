@@ -82,10 +82,10 @@ class Player(pygame.sprite.Sprite):
                 self.rect.left = f.rect.right
 
         # Делаем так, что бы человечек но мог выйти за границы экрана
-        if self.rect.right > settings.SCREEN_WIDTH:
-            self.rect.right = settings.SCREEN_WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
+        # if self.rect.right > settings.SCREEN_WIDTH:
+        #     self.rect.right = settings.SCREEN_WIDTH
+        # if self.rect.left < 0:
+        #     self.rect.left = 0
 
         if self.speed_x < 0:
             self.state_x = PLAYER_STATE_LEFT
