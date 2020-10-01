@@ -62,13 +62,15 @@ while running:
 
         # Проверка попали мы по блоку или нет
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            pos = [event.pos[0] - sdvig_x, event.pos[1]]
             blocks = group_blocks.sprites()
 
             for block in blocks:
-                if block.rect.collidepoint(event.pos):
+                if block.rect.collidepoint(pos):
                     rastoyanie = math.dist(p.rect.center, block.rect.center)
                     if rastoyanie < 250:
                         block.damage()
+            # print(event.pos)
 
     # обработка событий клавиатуры
     keyboard = pygame.key.get_pressed()
@@ -89,16 +91,14 @@ while running:
 
     # Рендеринг
     u = round(scr) % image_rect.width
-    screen.fill([0, 0, 0])
     screen.blit(fon, [-u, 0])
     # group_sprite.draw(screen)
     sprites = group_sprite.sprites()
     sdvig_x = settings.SCREEN_WIDTH / 2 - p.rect.centerx
+    sdvig_x = int(sdvig_x)
     scr = - sdvig_x
-
     for sprite in sprites:
         r = sprite.rect.move(sdvig_x, 0)
         screen.blit(sprite.image, r)
-
     # После отрисовки всего, переворачиваем экран
     pygame.display.flip()
