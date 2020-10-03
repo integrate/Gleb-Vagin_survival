@@ -18,7 +18,7 @@ pygame.display.set_caption("Survival")
 # часы
 clock = pygame.time.Clock()
 
-# создаём группу спрайт
+# создаём группу спрайтов
 group_sprite = pygame.sprite.Group()
 
 # создаём блоки
