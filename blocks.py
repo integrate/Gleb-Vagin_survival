@@ -27,6 +27,6 @@ class Block(pygame.sprite.Sprite):
         else:
             self.image = settings.BLOCK_IMAGE[self.tip].copy()
 
-        f = pygame.font.SysFont('arial', 25)
+        f = pygame.font.SysFont("comic sans", 25)
         f_render = f.render(str(self.hp), True, [0, 255, 0])
         self.image.blit(f_render, [0, 0])

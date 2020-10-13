@@ -18,8 +18,15 @@ settings.SCREEN_HEIGHT = screen.get_height()
 pygame.display.set_caption("карта, просто карта")
 
 # СОЗДАЁМ КНОПКУ
-knopka = pygame.Rect(500, 400, 100, 50)
+knopka_font = pygame.font.SysFont('arial', 35)
+knopka_font_surf = knopka_font.render("сохранить", False, [155, 174, 0])
+knopka_width = knopka_font_surf.get_width()
+knopka_height = knopka_font_surf.get_height()
+
+knopka = pygame.Rect(0, 0, knopka_width, knopka_height)
 pygame.draw.rect(screen, [228, 228, 228], knopka, 0)
+screen.blit(knopka_font_surf, knopka)
+
 
 running = True
 while running:
