@@ -1,9 +1,25 @@
 import pygame
 import settings
 import blocks
+import json
 
-def save_map(                                                         ):
-    print("выпАлняем сАхрОнение карты")
+
+def save_map():
+    open_open = open("save_karta.json", 'w+')
+
+    spisok_sprites = group_sprite.sprites()
+    bab = []
+    for s in spisok_sprites:
+        block_slovar = {
+            'x': s.rect.x,
+            'y': s.rect.y,
+            'tip': s.tip
+        }
+        bab.append(block_slovar)
+
+    json.dump(bab, open_open, indent=4)
+    open_open.close()
+
 
 print(__file__)
 # подготавливаем библиотеку

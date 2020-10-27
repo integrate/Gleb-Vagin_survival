@@ -1,4 +1,13 @@
-import pygame, player, blocks, settings, math, utilite, os
+import pygame, player, blocks, settings, math, utilite, os, json
+
+
+def karta_load():
+    print('типо загружаем карту')
+    qwerty = open("save_karta.json", 'r')
+    uiopas = json.load(qwerty)
+    print(uiopas)
+    qwerty.close()
+
 
 os.environ['SDL_VIDEODRIVER'] = "directx"
 
@@ -20,14 +29,8 @@ clock = pygame.time.Clock()
 
 # создаём группу спрайтов
 group_sprite = pygame.sprite.Group()
-
-# создаём блоки
-t = blocks.Block(200, 920, blocks.BLOCK_TYPE_STONE)
-g = blocks.Block(500, 805, blocks.BLOCK_TYPE_WOOD)
-r = blocks.Block(400, 600, blocks.BLOCK_TYPE_GROUND)
 group_blocks = pygame.sprite.Group()
-group_blocks.add(t, g, r)
-group_sprite.add(t, g, r)
+karta_load()
 
 # создаём игрока
 p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
