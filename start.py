@@ -1,11 +1,17 @@
 import pygame, player, blocks, settings, math, utilite, os, json
 
 
-def karta_load():
+def karta_load(gr, gs):
     print('типо загружаем карту')
     qwerty = open("save_karta.json", 'r')
     uiopas = json.load(qwerty)
     print(uiopas)
+    for sapoiu in uiopas:
+        print(sapoiu)
+        sdx = blocks.Block(sapoiu['x'], sapoiu['y'], sapoiu['tip'])
+        gs.add(sdx)
+        gr.add(sdx)
+
     qwerty.close()
 
 
@@ -30,8 +36,7 @@ clock = pygame.time.Clock()
 # создаём группу спрайтов
 group_sprite = pygame.sprite.Group()
 group_blocks = pygame.sprite.Group()
-karta_load()
-
+karta_load(group_blocks, group_sprite)
 # создаём игрока
 p = player.Player('name', settings.SCREEN_WIDTH / 2, 0)
 group_sprite.add(p)
