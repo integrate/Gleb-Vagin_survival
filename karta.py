@@ -21,6 +21,13 @@ def save_map():
     open_open.close()
 
 
+def set_block(block_x, block_y, tip):
+    x = 37 * block_x
+    y = 36 * block_y
+    dgsgdysg = blocks.Block(x, y, tip)
+    group_sprite.add(dgsgdysg)
+
+
 print(__file__)
 # подготавливаем библиотеку
 pygame.init()
@@ -44,6 +51,9 @@ knopka_height = knopka_font_surf.get_height()
 knopka = pygame.Rect(0, 0, knopka_width, knopka_height)
 
 group_sprite = pygame.sprite.Group()
+set_block(0, 0, blocks.BLOCK_TYPE_STONE)
+set_block(4, 7, blocks.BLOCK_TYPE_GROUND)
+set_block(1, 1, blocks.BLOCK_TYPE_WOOD)
 running = True
 while running:
     # задержка
