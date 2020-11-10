@@ -28,6 +28,12 @@ def set_block(block_x, block_y, tip):
     group_sprite.add(dgsgdysg)
 
 
+def proshetka(x, y):
+    block_x = x // 37
+    block_y = y // 36
+    return [block_x, block_y]
+
+
 print(__file__)
 # подготавливаем библиотеку
 pygame.init()
@@ -37,7 +43,7 @@ pygame.mixer.init()  # для звука
 clock = pygame.time.Clock()
 
 # создаём окно
-screen = pygame.display.set_mode((1000, 750))
+screen = pygame.display.set_mode((0, 0))
 settings.SCREEN_WIDTH = screen.get_width()
 settings.SCREEN_HEIGHT = screen.get_height()
 pygame.display.set_caption("карта, просто карта")
@@ -51,9 +57,6 @@ knopka_height = knopka_font_surf.get_height()
 knopka = pygame.Rect(0, 0, knopka_width, knopka_height)
 
 group_sprite = pygame.sprite.Group()
-set_block(0, 0, blocks.BLOCK_TYPE_STONE)
-set_block(4, 7, blocks.BLOCK_TYPE_GROUND)
-set_block(1, 1, blocks.BLOCK_TYPE_WOOD)
 running = True
 while running:
     # задержка
@@ -65,8 +68,8 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             a = knopka.collidepoint(event.pos[0], event.pos[1])
             if a == 0:
-                block = blocks.Block(event.pos[0], event.pos[1], blocks.BLOCK_TYPE_GROUND)
-                group_sprite.add(block)
+                yuiop = proshetka(event.pos[0], event.pos[1])
+                set_block(yuiop[0], yuiop[1], blocks.BLOCK_TYPE_STONE)
             else:
                 save_map()
 
