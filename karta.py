@@ -69,7 +69,7 @@ while running:
             a = knopka.collidepoint(event.pos[0], event.pos[1])
             if a == 0:
                 yuiop = proshetka(event.pos[0], event.pos[1])
-                set_block(yuiop[0], yuiop[1], blocks.BLOCK_TYPE_STONE)
+                set_block(yuiop[0], yuiop[1], blocks.BLOCK_TYPE_GROUND)
             else:
                 save_map()
 

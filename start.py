@@ -15,12 +15,12 @@ def karta_load(gr, gs):
     qwerty.close()
 
 
-os.environ['SDL_VIDEODRIVER'] = "directx"
+# os.environ['SDL_VIDEODRIVER'] = "directx"
 
 print(__file__)
 # подготавливаем библиотеку
 pygame.init()
-print(pygame.display.get_driver())
+# print(pygame.display.get_driver())
 pygame.mixer.init()  # для звука
 
 # создаём окно
@@ -28,6 +28,7 @@ pygame.mixer.init()  # для звука
 screen = pygame.display.set_mode((0, 0))
 settings.SCREEN_WIDTH = screen.get_width()
 settings.SCREEN_HEIGHT = screen.get_height()
+settings.GROUND_HEIGHT = settings.SCREEN_HEIGHT-100
 pygame.display.set_caption("Survival")
 
 # часы
